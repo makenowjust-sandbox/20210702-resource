@@ -11,19 +11,19 @@ object Expr {
   final case class Var(x: Name) extends Expr
 
   /** `f(x)` */
-  final case class App(f: Name, x: Name)
+  final case class App(f: Name, x: Name) extends Expr
 
   /** `tick(v)` */
-  final case class Tick(v: Int)
+  final case class Tick(d: Int) extends Expr
 
   /** `let x = e1 in e2` */
-  final case class Let(x: Name, e1: Expr, e2: Expr)
+  final case class Let(x: Name, e1: Expr, e2: Expr) extends Expr
 
-  /** `let _ = e1 in e2` */
-  final case class LetIgnore(e1: Expr, e2: Expr)
+  /** `share (x2, x3) = x in e` */
+  final case class Share(x1: Name, x2: Name, x3: Name, e: Expr) extends Expr
 
   /** `[]` */
-  case object Nil extends Expr
+  final case class Nil(t: Type) extends Expr
 
   /** `x1 :: x2` */
   final case class Cons(x1: Name, x2: Name) extends Expr

@@ -1,9 +1,14 @@
 package codes.quine.sandbox.resource
 
-sealed abstract class RAType
+/** Resource annotated type.
+  *
+  * P is a type represents potential.
+  */
+sealed abstract class RAType[+P]
 
 object RAType {
-  case object Bool extends RAType
-  final case class Pair(t1: RAType, t2: RAType) extends RAType
-  final case class List(p: Poly, t: RAType) extends RAType
+  case object Unit extends RAType[Nothing]
+  case object Bool extends RAType[Nothing]
+  final case class Pair[P](r1: RAType[P], r2: RAType[P]) extends RAType[P]
+  final case class List[P](p: Poly[P], r: RAType[P]) extends RAType[P]
 }

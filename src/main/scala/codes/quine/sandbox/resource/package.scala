@@ -6,5 +6,5 @@ package object resource {
   type Name = String
 
   /** A resource annotation. */
-  type Poly = Vector[Name]
+  type Poly[A] = Vector[A]
 }
